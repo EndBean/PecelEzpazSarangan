@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Company Profile — Pecel Ezpaz Sarangan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brown:    #5C3D1E;
+      --brown-lt: #8B5E3C;
+      --gold:     #C8922A;
+      --gold-lt:  #E8B84B;
+      --cream:    #FDF6EC;
+      --green:    #3D6B3A;
+      --green-lt: #5A8C56;
+      --text:     #2E2E2E;
+      --text-lt:  #6B6B6B;
+      --white:    #FFFFFF;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; background: var(--cream); color: var(--text); line-height: 1.75; }
+
+    /* NAVBAR */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 999;
+      background: rgba(92,61,30,0.96); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6vw; height: 64px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; color: var(--gold-lt); font-size: 1.15rem; font-weight: 700; }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.4px; transition: color .2s; }
+    .nav-links a:hover { color: var(--gold-lt); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #3B2005 0%, #6B3A10 45%, #8B5E3C 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 6vw 80px; position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(200,146,42,0.25); border: 1px solid rgba(200,146,42,0.5);
+      color: var(--gold-lt); font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 6px 20px; border-radius: 50px; margin-bottom: 24px;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      color: var(--white); line-height: 1.1; margin-bottom: 12px;
+    }
+    .hero-title span { color: var(--gold-lt); }
+    .hero-sub {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: rgba(255,255,255,0.72); max-width: 520px;
+      margin: 0 auto 40px;
+    }
+    .hero-stats { display: flex; gap: 48px; justify-content: center; flex-wrap: wrap; margin-top: 48px; }
+    .stat { text-align: center; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--gold-lt); line-height: 1; }
+    .stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.6); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+    .divider-line { width: 60px; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-lt)); border-radius: 2px; margin: 16px auto; }
+
+    /* SECTIONS */
+    section { padding: 80px 6vw; }
+    section:nth-child(even) { background: var(--white); }
+    .section-label { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3.5vw, 2.4rem); color: var(--brown); margin-bottom: 8px; }
+    .section-intro { color: var(--text-lt); font-size: 0.95rem; max-width: 640px; margin-bottom: 40px; }
+    .container { max-width: 1080px; margin: 0 auto; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .about-text p { color: var(--text-lt); margin-bottom: 16px; font-size: 0.95rem; }
+    .about-card { background: linear-gradient(135deg, var(--brown) 0%, var(--brown-lt) 100%); border-radius: 16px; padding: 36px; color: var(--white); }
+    .about-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold-lt); margin-bottom: 20px; }
+    .info-row { display: flex; gap: 12px; margin-bottom: 14px; font-size: 0.88rem; }
+    .info-label { color: rgba(255,255,255,0.55); min-width: 120px; }
+    .info-val { color: var(--white); font-weight: 500; }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--gold), var(--green-lt)); }
+    .tl-item { position: relative; margin-bottom: 36px; }
+    .tl-dot { position: absolute; left: -28px; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); border: 3px solid var(--cream); box-shadow: 0 0 0 2px var(--gold); }
+    .tl-year { font-size: 0.75rem; font-weight: 600; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+    .tl-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--brown); margin-bottom: 6px; }
+    .tl-desc { font-size: 0.9rem; color: var(--text-lt); }
+
+    /* VISION MISSION */
+    #visi { background: linear-gradient(135deg, var(--brown) 0%, #3D2408 100%); }
+    #visi .section-label { color: var(--gold-lt); }
+    #visi .section-title { color: var(--white); }
+    #visi .section-intro { color: rgba(255,255,255,0.65); }
+    .vm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .vm-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 32px; }
+    .vm-icon { font-size: 2rem; margin-bottom: 12px; }
+    .vm-card h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--gold-lt); margin-bottom: 12px; }
+    .vm-card p, .vm-card li { color: rgba(255,255,255,0.75); font-size: 0.9rem; line-height: 1.7; }
+    .vm-card ul { list-style: none; padding: 0; }
+    .vm-card ul li { display: flex; gap: 10px; margin-bottom: 8px; }
+    .vm-card ul li::before { content: '✦'; color: var(--gold); font-size: 0.7rem; margin-top: 4px; }
+
+    /* FEATURES */
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+    .feature-card { background: var(--cream); border: 1px solid rgba(92,61,30,0.1); border-radius: 16px; padding: 28px 24px; text-align: center; transition: transform .25s, box-shadow .25s; }
+    .feature-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(92,61,30,0.12); }
+    .feature-icon { font-size: 2.2rem; margin-bottom: 12px; }
+    .feature-card h4 { font-size: 0.95rem; font-weight: 600; color: var(--brown); margin-bottom: 8px; }
+    .feature-card p { font-size: 0.82rem; color: var(--text-lt); }
+
+    /* PRODUCT */
+    .product-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .product-main { background: linear-gradient(135deg, var(--green) 0%, var(--green-lt) 100%); border-radius: 20px; padding: 40px; color: var(--white); }
+    .product-main h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #C8F0C3; margin-bottom: 8px; }
+    .product-main p { color: rgba(255,255,255,0.8); font-size: 0.9rem; margin-bottom: 20px; }
+    .product-badge { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: var(--white); font-size: 0.78rem; padding: 4px 14px; border-radius: 50px; margin-bottom: 20px; }
+    .product-side h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--brown); margin: 0 0 12px; }
+    .lauk-list { list-style: none; padding: 0; }
+    .lauk-list li { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(92,61,30,0.08); font-size: 0.88rem; color: var(--text-lt); }
+    .lauk-list li::before { content: '🍃'; }
+    .consistency-box { background: #FFF8F0; border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 20px; margin-top: 24px; font-size: 0.85rem; color: var(--text-lt); }
+    .consistency-box strong { color: var(--brown); display: block; margin-bottom: 4px; }
+
+    /* OPERATIONS */
+    .ops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .ops-card { background: var(--white); border-radius: 14px; padding: 24px; border-top: 4px solid var(--gold); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+    .ops-icon { font-size: 1.6rem; margin-bottom: 10px; }
+    .ops-label { font-size: 0.72rem; color: var(--text-lt); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+    .ops-val { font-size: 1rem; font-weight: 600; color: var(--brown); }
+
+    /* REACH */
+    #jangkauan { background: linear-gradient(135deg, #1B3A1A 0%, var(--green) 100%); }
+    #jangkauan .section-label { color: #A8E6A3; }
+    #jangkauan .section-title { color: var(--white); }
+    .reach-grid { display: flex; gap: 24px; flex-wrap: wrap; }
+    .reach-card { flex: 1; min-width: 200px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; padding: 32px; text-align: center; }
+    .reach-icon { font-size: 2.5rem; margin-bottom: 12px; }
+    .reach-title { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+    .reach-desc { font-size: 0.82rem; color: rgba(255,255,255,0.65); }
+
+    /* TESTIMONIALS */
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .testi-card { background: var(--white); border-radius: 16px; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.07); border-bottom: 4px solid var(--gold); }
+    .testi-placeholder {
+      border: 2px dashed rgba(200,146,42,0.35);
+      border-radius: 10px;
+      min-height: 260px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: var(--text-lt); font-size: 0.83rem; text-align: center; gap: 10px;
+      background: #FFFBF4; padding: 16px;
+      cursor: pointer; transition: background .2s;
+    }
+    .testi-placeholder:hover { background: #FFF3DC; }
+    .testi-placeholder .ph-icon { font-size: 2rem; opacity: 0.5; }
+    .testi-placeholder img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; display: none; }
+
+    /* GALLERY */
+    #galeri { background: var(--brown); }
+    #galeri .section-label { color: var(--gold-lt); }
+    #galeri .section-title { color: var(--white); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .gallery-item {
+      border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;
+      background: rgba(255,255,255,0.07); border: 2px dashed rgba(255,255,255,0.2);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.45); font-size: 0.85rem; gap: 8px;
+      transition: background .2s;
+    }
+    .gallery-item:hover { background: rgba(255,255,255,0.12); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: none; }
+    .gallery-item span.icon { font-size: 2rem; }
+
+    /* SUPPLY */
+    .supply-boxes { display: flex; gap: 20px; flex-wrap: wrap; }
+    .supply-box { flex: 1; min-width: 200px; background: var(--cream); border: 1px solid rgba(92,61,30,0.1); border-radius: 14px; padding: 24px; }
+    .supply-box .icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .supply-box h4 { font-size: 0.9rem; font-weight: 600; color: var(--brown); margin-bottom: 6px; }
+    .supply-box p { font-size: 0.83rem; color: var(--text-lt); }
+
+    /* CONTACT */
+    #kontak { background: linear-gradient(135deg, var(--brown) 0%, #2A1505 100%); }
+    #kontak .section-title { color: var(--white); }
+    #kontak .section-label { color: var(--gold-lt); }
+    .contact-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; align-items: start; }
+    .contact-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 32px; }
+    .contact-item { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+    .contact-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(200,146,42,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .contact-label { font-size: 0.72rem; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; }
+    .contact-val { font-size: 0.92rem; color: var(--white); font-weight: 500; margin-top: 2px; }
+    .contact-val a { color: var(--gold-lt); text-decoration: none; }
+    .contact-val a:hover { text-decoration: underline; }
+    .map-wrapper { border-radius: 16px; overflow: hidden; border: 2px solid rgba(255,255,255,0.12); }
+    .map-wrapper iframe { width: 100%; height: 340px; border: none; display: block; }
+    .map-link-btn {
+      display: block; text-align: center; margin-top: 12px;
+      background: rgba(200,146,42,0.2); border: 1px solid rgba(200,146,42,0.4);
+      color: var(--gold-lt); font-size: 0.82rem; font-weight: 600;
+      padding: 10px 20px; border-radius: 10px; text-decoration: none;
+      letter-spacing: 0.5px; transition: background .2s;
+    }
+    .map-link-btn:hover { background: rgba(200,146,42,0.35); }
+
+    /* QUOTE */
+    .quote-section { text-align: center; padding: 64px 6vw; background: linear-gradient(135deg, #2A1505 0%, #5C3D1E 100%); }
+    .quote-mark { font-family: 'Playfair Display', serif; font-size: 5rem; color: var(--gold-lt); opacity: 0.3; line-height: 0.8; }
+    .quote-text { font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 3vw, 1.8rem); color: var(--white); line-height: 1.6; margin: 16px 0; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .quote-year { font-size: 0.8rem; color: rgba(255,255,255,0.4); letter-spacing: 3px; text-transform: uppercase; }
+
+    /* FOOTER */
+    footer { background: #1A0D00; color: rgba(255,255,255,0.4); text-align: center; padding: 24px; font-size: 0.78rem; }
+    footer span { color: var(--gold-lt); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0 4vw; }
+      .nav-links { display: none; }
+      .about-grid, .vm-grid, .product-layout, .contact-layout, .testi-grid, .gallery-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">Pecel Ezpaz Sarangan</div>
+  <ul class="nav-links">
+    <li><a href="#tentang">About</a></li>
+    <li><a href="#sejarah">History</a></li>
+    <li><a href="#visi">Vision</a></li>
+    <li><a href="#keunggulan">Strengths</a></li>
+    <li><a href="#produk">Products</a></li>
+    <li><a href="#operasional">Operations</a></li>
+    <li><a href="#testimoni">Reviews</a></li>
+    <li><a href="#galeri">Gallery</a></li>
+    <li><a href="#kontak">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div style="position:relative;z-index:1;">
+    <div class="hero-badge">Company Profile &middot; Traditional Javanese Cuisine</div>
+    <h1 class="hero-title">Pecel <span>Ezpaz</span><br/>Sarangan</h1>
+    <p class="hero-sub">Authentic Nganjuk-style peanut sauce served fresh every morning in Malang City since 2009.</p>
+    <div class="divider-line"></div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">2009</div>
+        <div class="stat-label">Founded</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Years of Service</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100+</div>
+        <div class="stat-label">Daily Servings</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="tentang">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <span class="section-label">About Us</span>
+        <h2 class="section-title">A Mobile Pecel Stall<br/>That Stood the Test of Time</h2>
+        <div class="divider-line" style="margin:0 0 24px;"></div>
+        <p><strong>Pecel Ezpaz Sarangan</strong> is a traditional Javanese food business operating under the concept of a <em>pecel mobil</em> (mobile pecel stall), serving food directly from a vehicle equipped with shelves and serving utensils.</p>
+        <p>Founded in <strong>October 2009</strong> by Ismiati, this business was built to fulfill the community's need for a nutritious, delicious, and affordable breakfast in Malang City.</p>
+        <p>Starting from a simple belief that <em>breakfast is a daily necessity that will never run out of demand</em>, what once only sold out by midday now consistently sells out before 10:00 AM every single morning.</p>
+      </div>
+      <div class="about-card">
+        <h3>👤 Owner &amp; Business Identity</h3>
+        <div class="info-row">
+          <span class="info-label">Owner</span>
+          <span class="info-val">Ismiati</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Address</span>
+          <span class="info-val">Perum. Bulan Terang Utama Blok KR 25 No. 4, Kedungkandang, Malang</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">WhatsApp</span>
+          <span class="info-val"><a href="https://wa.me/6281233467382" style="color:var(--gold-lt);">081233467382</a></span>
+        </div>
+        <hr style="border-color:rgba(255,255,255,0.1);margin:18px 0;"/>
+        <div class="info-row">
+          <span class="info-label">Business Name</span>
+          <span class="info-val">Pecel Ezpaz Sarangan</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Type</span>
+          <span class="info-val">Traditional Javanese Cuisine (Mobile Stall)</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Established</span>
+          <span class="info-val">October 2009</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Location</span>
+          <span class="info-val">Jl. Sarangan No. 14, Lowokwaru, Malang 65141</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section id="sejarah" style="background:var(--white);">
+  <div class="container">
+    <span class="section-label">Our Journey</span>
+    <h2 class="section-title">History &amp; Growth</h2>
+    <div class="divider-line" style="margin:0 0 48px;"></div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">October 2009</div>
+        <div class="tl-title">The Beginning</div>
+        <div class="tl-desc">Ismiati launched the business after recognizing a major opportunity in the breakfast segment with little competition. She started selling in front of a shophouse that has since become the café <em>'Selawe'</em> in the Lowokwaru area.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--brown-lt);box-shadow:0 0 0 2px var(--brown-lt);"></div>
+        <div class="tl-year">2009 – 2010</div>
+        <div class="tl-title">Building the Foundation</div>
+        <div class="tl-desc">Customers were still few and food only sold out by midday. Ismiati relocated to a spot in front of <strong>SDN Lowokwaru 3</strong>, just a short distance from the original location, seeking a more strategic position. She continued to stay consistent in quality throughout this period.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--green);box-shadow:0 0 0 2px var(--green);"></div>
+        <div class="tl-year">2010 – Present</div>
+        <div class="tl-title">Growth &amp; Loyal Following</div>
+        <div class="tl-desc">After roughly one year of perseverance, loyal customers began to grow in numbers. Today, Pecel Ezpaz Sarangan sells out <strong>before 10:00 AM every day</strong>, with customers coming from Malang, other cities across Indonesia, and even from abroad.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION MISSION -->
+<section id="visi">
+  <div class="container">
+    <span class="section-label">Direction &amp; Purpose</span>
+    <h2 class="section-title">Vision &amp; Mission</h2>
+    <div class="divider-line" style="margin:0 0 40px;"></div>
+    <div class="vm-grid">
+      <div class="vm-card">
+        <div class="vm-icon">🎯</div>
+        <h3>Vision</h3>
+        <p>To become the top choice for traditional Javanese pecel breakfast, recognized for its quality not only in Malang City but across cities throughout Indonesia.</p>
+      </div>
+      <div class="vm-card">
+        <div class="vm-icon">🚀</div>
+        <h3>Mission</h3>
+        <ul>
+          <li>Serve pecel with authentic Nganjuk-style sauce, consistently prepared fresh every day</li>
+          <li>Maintain customer satisfaction by sourcing fresh ingredients daily</li>
+          <li>Continue to innovate in service while preserving traditional flavors</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRENGTHS -->
+<section id="keunggulan">
+  <div class="container">
+    <span class="section-label">What Sets Us Apart</span>
+    <h2 class="section-title">Strengths &amp; Core Values</h2>
+    <p class="section-intro">Pecel Ezpaz Sarangan is more than just ordinary pecel. Here is what makes it truly special.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🌶️</div>
+        <h4>Authentic Nganjuk Sauce</h4>
+        <p>A one-of-a-kind peanut sauce recipe rooted in Nganjuk tradition, freshly hand-crafted every day and not found elsewhere.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🍱</div>
+        <h4>Variety of Side Dishes</h4>
+        <p>A rich selection of consignment side dishes from partner sellers, giving customers more choices with every visit.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💧</div>
+        <h4>Free Drinking Water</h4>
+        <p>Customers receive complimentary drinking water as a gesture of warm hospitality from Ismiati.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📺</div>
+        <h4>Active on YouTube</h4>
+        <p>Regularly shares content on YouTube to reach a broader audience and showcase the authentic preparation process.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚗</div>
+        <h4>Mobile Stall Concept</h4>
+        <p>Food is served directly from a neatly arranged vehicle, making it hygienic, practical, and instantly recognizable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="produk" style="background:var(--white);">
+  <div class="container">
+    <span class="section-label">Our Menu</span>
+    <h2 class="section-title">Signature Products</h2>
+    <div class="divider-line" style="margin:0 0 40px;"></div>
+    <div class="product-layout">
+      <div class="product-main">
+        <span class="product-badge">Main Menu</span>
+        <h3>Nasi Pecel with Nganjuk Peanut Sauce</h3>
+        <p>A classic rice dish topped with blanched vegetables and a rich, handcrafted peanut sauce originating from Nganjuk, prepared fresh using carefully selected ingredients to ensure a consistently authentic taste.</p>
+        <p style="color:rgba(255,255,255,0.6);font-size:0.8rem;">✦ Sold out before 10:00 AM every day</p>
+      </div>
+      <div class="product-side">
+        <h4>🍃 Accompaniments &amp; Sides</h4>
+        <ul class="lauk-list">
+          <li>Peyek (Rempeyek / Peanut Crackers) — Customer favorite</li>
+          <li>Assorted consignment side dishes</li>
+        </ul>
+        <div class="consistency-box">
+          <strong>⏱️ Flavor Consistency</strong>
+          The peanut sauce is made fresh every day and processed in batches every 5 days to preserve its authentic character. The flavor profile stays unchanged, visit after visit.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPERATIONS -->
+<section id="operasional">
+  <div class="container">
+    <span class="section-label">How We Operate</span>
+    <h2 class="section-title">Operational Overview</h2>
+    <p class="section-intro">Efficiency and consistency are the foundation of every morning at Pecel Ezpaz Sarangan.</p>
+    <div class="ops-grid">
+      <div class="ops-card">
+        <div class="ops-icon">🕖</div>
+        <div class="ops-label">Operating Hours</div>
+        <div class="ops-val">Open from 07:00 WIB<br/>Sold out before 10:00 WIB</div>
+      </div>
+      <div class="ops-card">
+        <div class="ops-icon">🔥</div>
+        <div class="ops-label">Peak Hour</div>
+        <div class="ops-val">07:00 WIB</div>
+      </div>
+      <div class="ops-card">
+        <div class="ops-icon">🍛</div>
+        <div class="ops-label">Daily Capacity</div>
+        <div class="ops-val">±100 servings<br/>(up to 200 on weekends)</div>
+      </div>
+      <div class="ops-card">
+        <div class="ops-icon">⚡</div>
+        <div class="ops-label">Order Processing Speed</div>
+        <div class="ops-val">50 packs per hour</div>
+      </div>
+      <div class="ops-card">
+        <div class="ops-icon">🛒</div>
+        <div class="ops-label">Ingredient Sourcing</div>
+        <div class="ops-val">Daily purchase<br/>(always fresh)</div>
+      </div>
+      <div class="ops-card">
+        <div class="ops-icon">♻️</div>
+        <div class="ops-label">Leftover Management</div>
+        <div class="ops-val">Remaining peyek is shared with neighbors near the seller's home</div>
+      </div>
+      <div class="ops-card">
+        <div class="ops-icon">👥</div>
+        <div class="ops-label">Workforce</div>
+        <div class="ops-val">Ismiati together with her husband</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPLY CHAIN -->
+<section style="background:var(--white);">
+  <div class="container">
+    <span class="section-label">Supply Chain</span>
+    <h2 class="section-title">Ingredients &amp; Production</h2>
+    <div class="divider-line" style="margin:0 0 40px;"></div>
+    <div class="supply-boxes">
+      <div class="supply-box">
+        <div class="icon">🌿</div>
+        <h4>Always Fresh Ingredients</h4>
+        <p>Ismiati shops for raw ingredients <strong>every single day</strong> to guarantee the freshness of every dish served to customers.</p>
+      </div>
+      <div class="supply-box">
+        <div class="icon">🥜</div>
+        <h4>House-Made Sauce</h4>
+        <p>The pecel sauce is blended in-house using a traditional Nganjuk recipe rather than store-bought paste, ensuring an authentic flavor that cannot be replicated.</p>
+      </div>
+      <div class="supply-box">
+        <div class="icon">🤝</div>
+        <h4>Side Dish Partners</h4>
+        <p>Collaborating with consignment partners to offer a wider variety of side dishes, enriching the menu and broadening customer choices.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REACH -->
+<section id="jangkauan">
+  <div class="container">
+    <span class="section-label">Customer Reach</span>
+    <h2 class="section-title">Trusted Across Borders</h2>
+    <div class="divider-line" style="margin:0 0 40px;background:linear-gradient(90deg,#A8E6A3,rgba(255,255,255,0.2));"></div>
+    <div class="reach-grid">
+      <div class="reach-card">
+        <div class="reach-icon">🏙️</div>
+        <div class="reach-title">Malang City</div>
+        <div class="reach-desc">A loyal customer base from across Malang City who have made Pecel Ezpaz Sarangan their daily breakfast staple.</div>
+      </div>
+      <div class="reach-card">
+        <div class="reach-icon">🗺️</div>
+        <div class="reach-title">Other Cities</div>
+        <div class="reach-desc">Regular customers traveling from cities such as Surabaya, Jakarta, and other parts of Indonesia.</div>
+      </div>
+      <div class="reach-card">
+        <div class="reach-icon">🌏</div>
+        <div class="reach-title">International</div>
+        <div class="reach-desc">Pecel Ezpaz Sarangan has gained recognition beyond Indonesia, earning loyal patrons from overseas.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimoni">
+  <div class="container">
+    <span class="section-label">What They Say</span>
+    <h2 class="section-title">Customer Reviews</h2>
+    <p class="section-intro">The trust of our customers is the greatest motivation to keep showing up every morning.</p>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <img src="https://img.sanishtech.com/u/1332e72cb68fab95c61d4d47b02bfce6.png" style="width:100%;border-radius:8px;" />
+      </div>
+      <div class="testi-card">
+        <img src="https://img.sanishtech.com/u/41394b0c7c4293018a49b91197010fd3.png" style="width:100%;border-radius:8px;" />
+      </div>
+      <div class="testi-card">
+        <img src="https://img.sanishtech.com/u/362690234b543417454b7f5257c6ff50.png" style="width:100%;border-radius:8px;" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="galeri">
+  <div class="container">
+    <span class="section-label">Photo Gallery</span>
+    <h2 class="section-title">Documentation</h2>
+    <div class="divider-line" style="margin:0 0 40px;background:linear-gradient(90deg,var(--gold-lt),rgba(255,255,255,0.2));"></div>
+    <div class="gallery-grid">
+        <img src="https://img.sanishtech.com/u/10533bf8e3eaac750101af19e02e4066.png" style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+    <div class="gallery-grid">
+      	<img src="https://img.sanishtech.com/u/3ba1d999389351091c13c77de8c1fc46.png" style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+    <div class="gallery-grid">
+      	<img src="https://img.sanishtech.com/u/9046ae638e03175da544bfc88a17ad75.png" style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="kontak">
+  <div class="container">
+    <span class="section-label">Get in Touch</span>
+    <h2 class="section-title">Contact &amp; Location</h2>
+    <div class="divider-line" style="margin:0 0 40px;"></div>
+    <div class="contact-layout">
+      <div class="contact-card">
+        <div class="contact-item">
+          <div class="contact-icon">👤</div>
+          <div>
+            <div class="contact-label">Owner</div>
+            <div class="contact-val">Ismiati — Pecel Ezpaz Sarangan</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">💬</div>
+          <div>
+            <div class="contact-label">WhatsApp</div>
+            <div class="contact-val"><a href="https://wa.me/6281233467382">081233467382</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Location</div>
+            <div class="contact-val">Jl. Sarangan No. 14, Lowokwaru,<br/>Malang, East Java 65141</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕖</div>
+          <div>
+            <div class="contact-label">Opening Hours</div>
+            <div class="contact-val">Every day, open from 07:00 WIB<br/>Sold out before 10:00 WIB</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="map-wrapper">
+          <iframe
+            src="https://maps.google.com/maps?q=Jl.+Sarangan+No.14,+Lowokwaru,+Kota+Malang,+Jawa+Timur&output=embed&z=16"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <a class="map-link-btn" href="https://maps.app.goo.gl/cJofBg32gYRTz8CRA" target="_blank" rel="noopener noreferrer">
+          📍 Open in Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <div class="quote-mark">"</div>
+  <div class="quote-text">Delicious breakfast, authentic flavors,<br/>friendly prices.</div>
+  <div class="quote-year">Pecel Ezpaz Sarangan &middot; Since 2009</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 <span>Pecel Ezpaz Sarangan</span> &middot; Ismiati &middot; Malang City, East Java, Indonesia</p>
+</footer>
+
+</body>
+</html>
